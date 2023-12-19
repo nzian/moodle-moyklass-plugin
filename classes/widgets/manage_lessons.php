@@ -27,7 +27,7 @@ namespace local_moyclass\widgets;
 class manage_lessons {
     public function get_lessons() {
         global $OUTPUT, $DB, $CFG, $USER;
-        $date_today = date('Y-m-d');
+        $date_today = date('d.m.Y');
         $teacher = $DB->get_record("local_moyclass_managers", ['email' => $USER->email]);
         $lessons = $DB->get_records('local_moyclass_lessons', ['date' => $date_today], 'begintime');
         $lessons_with_data = '';

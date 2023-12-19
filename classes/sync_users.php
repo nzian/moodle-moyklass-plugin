@@ -32,10 +32,10 @@ use moodle_exception;
 use stdClass;
 
 /**
- * Сервис для синхронизации пользователей между CRM и Moodle
+ * Service for synchronizing users between CRM and Moodle
  */
 class sync_users {
-    /** Регистранция работников школы
+    /** Registration of school employees
      *
      * @throws \coding_exception
      * @throws dml_exception
@@ -49,7 +49,7 @@ class sync_users {
     }
 
     /**
-     * Создаем пользователей в Moodle
+     * Creating users in Moodle
      *
      * @throws \coding_exception
      * @throws dml_exception
@@ -71,7 +71,7 @@ class sync_users {
     }
 
     /**
-     * Проверяем есть ли пользователь в DB
+     * Checking if the user exists in the DB
      *
      * @param string $email
      * @return false|mixed|\stdClass
@@ -86,7 +86,7 @@ class sync_users {
     }
 
     /**
-     * Проверяем активный ли пользователь для user->suspended
+     * Checking whether the user is active for user->suspended
      *
      * @param $active
      * @return int
@@ -100,7 +100,7 @@ class sync_users {
     }
 
     /**
-     * Обновляем пользователя по id
+     * Update user by id
      *
      * @param $student
      * @param $user_id
@@ -129,7 +129,7 @@ class sync_users {
     }
 
     /**
-     * Устанивливаем или обновляем пользователей
+     * Installing or updating users
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -145,7 +145,7 @@ class sync_users {
     }
 
     /**
-     * Создаем объект нового пользователя
+     * Create a new user object
      *
      * @param $student
      * @param $password
@@ -178,7 +178,7 @@ class sync_users {
     }
 
     /**
-     * Отправляем новому пользователю письмо после регистрации
+     * We send a letter to the new user after registration
      *
      * @throws \coding_exception
      * @throws dml_exception
@@ -193,7 +193,7 @@ class sync_users {
 
         if ($is_allow_emails) {
             $message = $emails->get_welcome_email($user->firstname, $user->username, $password);
-            $notification->send_email($userid, 'Welcome to Just Study', $message);
+            $notification->send_email($userid, 'Welcome to Vokabula', $message);
         }
     }
 }

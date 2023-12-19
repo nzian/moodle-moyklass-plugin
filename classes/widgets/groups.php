@@ -29,14 +29,14 @@ use local_moyclass\pages;
 class groups {
     public function get_groups() {
         global $OUTPUT, $DB, $USER;
-        // TODO: в будущем дожен быть email от $USER->email
-        $student = $DB->get_record("local_moyclass_students", ['email' => "pavlyshin96@mail.ru"]);
+        // TODO: in the future there should be an email from $USER->email ['email' => $USER->email]
+        $student = $DB->get_record("local_moyclass_students", ['email' => "davor@vokabula.com"]);
         $joins = $DB->get_records('local_moyclass_joins', ['userid' => $student->studentid]);
         $groups = '';
 
         $error = new pages();
         if (!$joins) {
-            return $error->error_alert("Записи в группы не найдены");
+            return $error->error_alert("No group entries found");
         }
 
         foreach ($joins as $join) {
@@ -56,7 +56,7 @@ class groups {
 
         $error = new pages();
         if (!$group) {
-            return $error->error_alert("Группа не найдена");
+            return $error->error_alert("Group not found");
         }
 
         $originalNextDate = $join->nextrecord;

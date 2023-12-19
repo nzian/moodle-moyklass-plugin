@@ -30,7 +30,7 @@ use local_moyclass\manager_db;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Автоматическая синхронизация видов абонементов из CRM Мой класс в LMS Moodle
+ * Automatic synchronization of subscription types from CRM My class in LMS Moodle
  */
 class upgrade_subscriptions extends \core\task\scheduled_task {
     /**
@@ -39,7 +39,7 @@ class upgrade_subscriptions extends \core\task\scheduled_task {
      * @return string
      */
     public function get_name() {
-        return "Обновить виды абонементов школы";
+        return "Update school subscription types";
     }
 
     /**

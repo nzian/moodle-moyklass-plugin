@@ -28,7 +28,7 @@ use local_moyclass\pages;
 
 class lessons {
     /**
-     *  Ищем все записи на уроки
+     *  We are looking for all lesson registrations
      * @return mixed
      * @throws \dml_exception
      */
@@ -61,7 +61,7 @@ class lessons {
 
         $error = new pages();
         if (!$records) {
-            return $error->error_alert("Записи на занятия не найдены");
+            return $error->error_alert("No class registrations found");
         }
 
         foreach ($records as $record) {
@@ -81,7 +81,7 @@ class lessons {
     }
 
     /**
-     * Отображаем информацию по каждому уроку
+     * Displaying information for each lesson
      *
      * @param $lesson_id
      * @param $record

@@ -22,11 +22,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'ForClasses';
-$string['moyclass_settings'] = 'Settings ForClasses';
+$string['pluginname'] = 'MoyKlass';
+$string['moyclass_settings'] = 'Settings MoyKlass';
 $string['moyclass_settings_apikey'] = 'API key';
-$string['moyclass_settings_apikey_desc'] = 'Key for auth in CRM ForClasses';
-$string['moyclass_managepage'] = 'Manage ForClasses';
+$string['moyclass_settings_apikey_desc'] = 'Key for auth in CRM MoyKlass';
+$string['moyclass_managepage'] = 'Manage MoyKlass';
 $string['moyclass_delete_record_title'] = 'Cancel lesson?';
 $string['moyclass_delete_record_desc'] = 'Are you sure you want to cancel this lesson?';
 $string['moyclass_delete_record_loading'] = 'Canceling...';

@@ -35,7 +35,7 @@ class subscriptions {
 
         $error = new pages();
         if (!$user_subscriptions) {
-            return $error->error_alert("Абонементы не найдены");
+            return $error->error_alert("No tickets found");
         }
 
         foreach ($user_subscriptions as $user_subscription) {
@@ -56,7 +56,7 @@ class subscriptions {
 
         $error = new pages();
         if (!$subscription) {
-            return $error->error_alert("Абонемент не найден");
+            return $error->error_alert("Subscription not found");
         }
 
         $newSellDate = date('d.m.Y', strtotime($user_subscription->selldate));
@@ -64,10 +64,10 @@ class subscriptions {
         $newEndDate = date('d.m.Y', strtotime($user_subscription->enddate));
 
         $lessonsLeft = $user_subscription->visitcount - $user_subscription->totalvisited;
-        $oneClassLeft = "Осталось уроков: $lessonsLeft из $subscription->visitcount";
+        $oneClassLeft = "Lessons left: $lessonsLeft из $subscription->visitcount";
 
         if ($subscription->visitcount == 0) {
-            $oneClassLeft = "Осталось уроков: &#8734;";
+            $oneClassLeft = "Lessons left: &#8734;";
         }
 
         $templatecontext = (object) [

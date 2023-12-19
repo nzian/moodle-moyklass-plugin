@@ -30,7 +30,7 @@ use local_moyclass\manager_db;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Автоматическая синхронизация успешных платежи учеников из CRM Мой класс в LMS Moodle
+ * Automatic synchronization of successful student payments from CRM My Class in LMS Moodle
  */
 class upgrade_payments extends \core\task\scheduled_task {
     /**
@@ -39,7 +39,7 @@ class upgrade_payments extends \core\task\scheduled_task {
      * @return string
      */
     public function get_name() {
-        return "Обновить успешные платежи учеников школы";
+        return "Update successful payments of school students";
     }
 
     /**

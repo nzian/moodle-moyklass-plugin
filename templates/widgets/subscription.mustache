@@ -3,7 +3,7 @@
         {{#remindsumm}}
             <span class="position-absolute translate-middle text-light badge rounded-pill bg-danger"
                              style="right: -10px; top: -8px">
-                    Долг: <span class="visually-hidden">{{remindsumm}} &#8381;</span>
+                    Duty: <span class="visually-hidden">{{remindsumm}} &#8381;</span>
             </span>
         </span>
         {{/remindsumm}}
@@ -11,13 +11,13 @@
         <div class="row">
             <div class="col-md-7 card-body">
                 <h5 class="card-title">{{name}} </h5>
-                <h6 class="card-subtitle text-muted">{{newSellDate}} - Сумма: {{price}} &#8381;</h6>
+                <h6 class="card-subtitle text-muted">{{newSellDate}} - Sum: {{price}} &#8381;</h6>
             </div>
             <div class="col-md-5 card-body">
-                {{#newNextDate}}<h5 class="card-title">Следующая запись: {{newNextDate}}</h5>{{/newNextDate}}
+                {{#newNextDate}}<h5 class="card-title">Next entry: {{newNextDate}}</h5>{{/newNextDate}}
                 <h6 class="text-muted">{{oneClassLeft}}</h6>
-                <h6 class="text-muted">Период: {{newBeginDate}} - {{newEndDate}}</h6>
-                {{#totalburned}}<h6 class="text-muted">Сгорело занятий: {{totalburned}}</h6>{{/totalburned}}
+                <h6 class="text-muted">Period: {{newBeginDate}} - {{newEndDate}}</h6>
+                {{#totalburned}}<h6 class="text-muted">Сlasses were burning: {{totalburned}}</h6>{{/totalburned}}
             </div>
         </div>
 

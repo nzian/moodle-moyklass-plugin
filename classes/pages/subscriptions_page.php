@@ -47,7 +47,7 @@ class subscriptions_page {
 
         $error = new pages();
         if (!$user_subscriptions) {
-            return $error->error_alert("Абонементы не найдены");
+            return $error->error_alert("No subscriptions found");
         }
 
         $widget_subscription = new subscriptions();

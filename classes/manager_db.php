@@ -28,11 +28,11 @@ use dml_exception;
 use stdClass;
 
 /**
- * Сервис для записи в базу данных результат получения данных по api
+ * Service for writing to the database the result of receiving data via API
  */
 class manager_db {
     /**
-     * Устанавливаем новый токен авторизации.
+     * Install a new authorization token.
      *
      * @return bool
      * @throws dml_exception
@@ -51,7 +51,7 @@ class manager_db {
     }
 
     /**
-     * Устанавливаем работников школы
+     * We identify school employees
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -61,8 +61,17 @@ class manager_db {
         global $DB;
         $api_service = new api_service();
         $results = $api_service->get_managers();
+
+        if (!is_array($results)) {
+            error_log("Error: The manager fetch results are not in the correct format.");
+            return;
+        }
+
         $transaction = $DB->start_delegated_transaction();
         foreach ($results as $result) {
+            if (!is_array($result)) {
+                continue;
+            }
             $dataobject = new stdClass();
             $dataobject->managerid = $result['id'];
             $dataobject->name = $result['name'];
@@ -84,7 +93,7 @@ class manager_db {
     }
 
     /**
-     * Проверяем статус клиента. Если клиент активный, вернет 1, если нет, вернет 0
+     * Checking the client's status. If the client is active, it will return 1, if not, it will return 0
      *
      * @param number $clientstateid
      * @return int
@@ -98,7 +107,7 @@ class manager_db {
     }
 
     /**
-     * Устанавливаем студентов школы
+     * We identify school students
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -151,7 +160,7 @@ class manager_db {
     }
 
     /**
-     * Устанавливаем информацию о группах студентов.
+     * We establish information about student groups.
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -190,7 +199,7 @@ class manager_db {
     }
 
     /**
-     * Устанавливаем информацию о всех группах школы.
+     * We establish information about all school groups.
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -200,34 +209,49 @@ class manager_db {
         global $DB;
         $DB->delete_records('local_moyclass_classes');
         $api_service = new api_service();
-        $results = $api_service->get_classes();
-        $transaction = $DB->start_delegated_transaction();
-        foreach ($results as $result) {
-            $dataobject = new stdClass();
-            $dataobject->classid = $result['id'];
-            $dataobject->name = $result['name'];
-            $dataobject->begindate = $result['beginDate'];
-            $dataobject->maxstudents = $result['maxStudents'];
-            $dataobject->status = $result['status'];
-            $dataobject->price = $result['price'];
-            $dataobject->pricecomment = $result['priceComment'];
-            $dataobject->managerids = json_encode($result['managerIds']);
 
-            $is_saved = $DB->get_record('local_moyclass_classes', ['classid' => $result['id']]);
-            if ($is_saved) {
-                $dataobject->id = $is_saved->id;
-                $dataobject->timemodified = time();
-                $DB->update_record('local_moyclass_classes', $dataobject);
-            } else {
-                $dataobject->timecreated = time();
-                $DB->insert_record('local_moyclass_classes', $dataobject, false);
-            }
+        try {
+            $results = $api_service->get_classes();
+        } catch (Exception $e) {
+            error_log("Greška u dohvatu klasa: " . $e->getMessage());
+            return;
         }
-        $DB->commit_delegated_transaction($transaction);
-    }
+
+        if (!is_array($results) || empty($results)) {
+            error_log("Greška: Rezultat dohvaćanja klasa je prazan ili nije niz.");
+            return;
+        }
+
+        $transaction = $DB->start_delegated_transaction();
+            foreach ($results as $result) {
+                if (!is_array($result)) {
+                    continue;
+                }
+                $dataobject = new stdClass();
+                $dataobject->classid = $result['id'];
+                $dataobject->name = $result['name'];
+                $dataobject->begindate = $result['beginDate'];
+                $dataobject->maxstudents = $result['maxStudents'];
+                $dataobject->status = $result['status'];
+                $dataobject->price = $result['price'];
+                $dataobject->pricecomment = $result['priceComment'];
+                $dataobject->managerids = json_encode($result['managerIds']);
+
+                $is_saved = $DB->get_record('local_moyclass_classes', ['classid' => $result['id']]);
+                if ($is_saved) {
+                    $dataobject->id = $is_saved->id;
+                    $dataobject->timemodified = time();
+                    $DB->update_record('local_moyclass_classes', $dataobject);
+                } else {
+                    $dataobject->timecreated = time();
+                    $DB->insert_record('local_moyclass_classes', $dataobject, false);
+                }
+            }
+            $DB->commit_delegated_transaction($transaction);
+        }
 
     /**
-     * Устанавливаем информацию о всех уроках школы.
+     * We establish information about all school lessons.
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -269,7 +293,7 @@ class manager_db {
     }
 
     /**
-     * Устанавливаем информацию о записях на все уроки школы
+     * We establish information about registrations for all school lessons
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -308,7 +332,7 @@ class manager_db {
 
     /**
      *
-     * Устанавливаем статусы клиентов
+     * Setting client statuses
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -319,8 +343,17 @@ class manager_db {
         $DB->delete_records('local_moyclass_clientstatuse');
         $api_service = new api_service();
         $results = $api_service->get_client_statuses();
+
+        if (!is_array($results)) {
+            error_log("Error: The manager fetch results are not in the correct format");
+            return;
+        }
+
         $transaction = $DB->start_delegated_transaction();
         foreach ($results as $result) {
+            if (!is_array($result)) {
+                continue;
+            }
             $dataobject = new stdClass();
             $dataobject->clientstatusid = $result['id'];
             $dataobject->name = $result['name'];
@@ -339,7 +372,7 @@ class manager_db {
     }
 
     /**
-     * Устанавливаем виды абонементов школы
+     * We establish the types of school subscriptions
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -373,7 +406,7 @@ class manager_db {
     }
 
     /**
-     * Устанавливаем купленные абонементы учеников школы
+     * Installing purchased school passes
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -420,7 +453,7 @@ class manager_db {
     }
 
     /**
-     * Устанавливаем успешные платежи учеников
+     * Establishing successful student payments
      *
      * @return void
      * @throws \dml_transaction_exception
@@ -456,7 +489,7 @@ class manager_db {
     }
 
     /**
-     * Устанавливаем счета на оплату для учеников школы
+     * We set up invoices for school students
      *
      * @return void
      * @throws \dml_transaction_exception

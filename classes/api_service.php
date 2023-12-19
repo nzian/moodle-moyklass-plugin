@@ -28,13 +28,13 @@ use dml_exception;
 require_once("{$CFG->libdir}/filelib.php");
 
 /**
- * Сервис для получения данных по api Мой класс
+ * Service for obtaining data via api My class
  */
 class api_service {
     private static $host_url = "https://api.moyklass.com/v1/company/";
 
     /**
-     * Авторизация. Получение токена для работы с API.
+     * Authorization. Obtaining a token for working with the API.
      *
      * @return bool
      */
@@ -50,22 +50,23 @@ class api_service {
     }
 
     /**
-     * Получение информации о работниках школы
+     * Obtaining information about school employees
      *
-     * @return void
-     */
+     * @return array
+    */
     public function get_managers(): array {
         $url = self::$host_url . "managers";
         try {
             $response = $this->api()->get($url);
             return json_decode($response, true);
         } catch (dml_exception $e) {
-            return false;
+            error_log("Error retrieving manager: " . $e->getMessage());
+            return [];
         }
     }
 
     /**
-     * Получаем информацию об учениках школы
+     * We receive information about school students
      *
      * @return false|mixed
      */
@@ -73,14 +74,23 @@ class api_service {
         $url = self::$host_url . "users";
         try {
             $response = $this->api()->get($url, ['includePayLink' => 'true', 'limit' => 500]);
-            return json_decode($response, true)['users'];
+            $decoded_response = json_decode($response, true);
+            if (is_array($decoded_response) && isset($decoded_response['users'])) {
+                return $decoded_response['users'];
+            } else {
+                // Logiranje greške ako odgovor nije u očekivanom formatu
+                error_log("Odgovor nije niz ili nedostaju korisnici: " . $response);
+                return [];
+            }
         } catch (dml_exception $e) {
-            return false;
+            // Logiranje izuzetka
+            error_log("Došlo je do izuzetka u get_students: " . $e->getMessage());
+            return [];
         }
     }
 
     /**
-     * Информация о группах студентов
+     * Information about student groups
      *
      * @return false|mixed
      */
@@ -95,22 +105,27 @@ class api_service {
     }
 
     /**
-     * Информация о группах школы
+     * Information about school groups
      *
      * @return false|mixed
      */
-    public function get_classes(): array {
+    public function get_classes() {
         $url = self::$host_url . "classes";
         try {
             $response = $this->api()->get($url);
-            return json_decode($response, true);
+            $decoded_response = json_decode($response, true);
+            if (is_null($decoded_response)) {
+                throw new Exception("Bad JSON response");
+            }
+            return $decoded_response;
         } catch (dml_exception $e) {
-            return false;
+            error_log("An exception occurred in get_classes: " . $e->getMessage());
+            return [];
         }
     }
 
     /**
-     * Информация о занятиях учеников школы
+     * Information about school students' activities
      *
      * @return false|mixed
      */
@@ -120,14 +135,20 @@ class api_service {
         $url = self::$host_url . "lessons?date={$first_date}&date={$second_date}&limit=500&includeRecords=true";
         try {
             $response = $this->api()->get($url);
-            return json_decode($response, true)['lessons'];
+            $decoded_response = json_decode($response, true);
+            return $decoded_response['lessons'] ?? [];
         } catch (dml_exception $e) {
-            return $e;
+            // Logging information about the exception
+            error_log("Došlo je do iznimke: " . $e->getMessage());
+            error_log("Trag greške: " . $e->getTraceAsString());
+
+            // Return an empty string or other appropriate value
+            return [];
         }
     }
 
     /**
-     * Получаем список записей учеников на занятия
+     * We get a list of student registrations for classes
      * @return array|false
      */
     public function get_lesson_records(): array {
@@ -143,7 +164,7 @@ class api_service {
     }
 
     /**
-     * Получаем статусы клиентов
+     * Getting client statuses
      *
      * @return void
      */
@@ -158,7 +179,7 @@ class api_service {
     }
 
     /**
-     * Получаем виды абонементов
+     * Getting the types of subscriptions
      *
      * @return void
      */
@@ -166,14 +187,17 @@ class api_service {
         $url = self::$host_url . "subscriptions";
         try {
             $response = $this->api()->get($url);
-            return json_decode($response, true)['subscriptions'];
+            $decoded_response = json_decode($response, true);
+            return $decoded_response['subscriptions'] ?? [];
         } catch (dml_exception $e) {
-            return false;
+            error_log("Došlo je do iznimke: " . $e->getMessage());
+            error_log("Trag greške: " . $e->getTraceAsString());
+            return [];
         }
     }
 
     /**
-     * Получаем абонементы учеников
+     * We receive student subscriptions
      *
      * @return void
      */
@@ -181,29 +205,35 @@ class api_service {
         $url = self::$host_url . "userSubscriptions";
         try {
             $response = $this->api()->get($url);
-            return json_decode($response, true)['subscriptions'];
+            $decoded_response = json_decode($response, true);
+            return $decoded_response['subscriptions'] ?? [];
         } catch (dml_exception $e) {
-            return false;
+            error_log("Došlo je do izuzetka u get_user_subscriptions: " . $e->getMessage());
+            error_log("Trag greške: " . $e->getTraceAsString());
+            return [];
         }
     }
 
     /**
-     * Получаем успешные платежи учеников
+     * Receiving successful student payments
      *
      * @return void
      */
     public function get_payments(): array {
         $url = self::$host_url . "payments";
         try {
-            $response = $this->api()->get($url, ['optype'=>'income']);
-            return json_decode($response, true)['payments'];
+            $response = $this->api()->get($url, ['optype' => 'income']);
+            $decoded_response = json_decode($response, true);
+            return $decoded_response['payments'] ?? [];
         } catch (dml_exception $e) {
-            return false;
+            error_log("Došlo je do izuzetka u get_payments: " . $e->getMessage());
+            error_log("Trag greške: " . $e->getTraceAsString());
+            return [];
         }
     }
 
     /**
-     * Получаем счета на оплату для учеников
+     * We receive invoices for payments for students
      *
      * @return void
      */
@@ -218,7 +248,7 @@ class api_service {
     }
 
     /**
-     * Отменяем урок
+     * We cancel the lesson
      * @param $recordId
      * @return bool
      */
@@ -241,13 +271,12 @@ class api_service {
     private function api(): \curl {
         global $DB;
         $x_access_token = $DB->get_record('local_moyclass_auth', ['active' => '1']);
-        $header = [];
+        $header = ['Content-Type: application/json', 'Accept: application/json'];
         if ($x_access_token) {
-            $header =
-                ['Content-Type: application/json', 'Accept: application/json', "x-access-token:{$x_access_token->accesstoken}"];
+            $header[] = "x-access-token:{$x_access_token->accesstoken}";
         } else {
-            $header =
-                ['Content-Type: application/json', 'Accept: application/json', 'x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'];
+            // Logging or handling the situation when the token is not available
+            error_log("The API access token is not available.");
         }
         $curl = new \curl();
         $curl->setHeader($header);

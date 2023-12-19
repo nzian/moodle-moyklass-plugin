@@ -30,7 +30,7 @@ use local_moyclass\manager_db;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Автоматическое обновление токена авторизации для получения данных
+ * Automatically refresh authorization token to receive data
  */
 class upgrade_token extends \core\task\scheduled_task {
     /**
@@ -39,7 +39,7 @@ class upgrade_token extends \core\task\scheduled_task {
      * @return string
      */
     public function get_name() {
-        return "Обновить токен авторизации";
+        return "Refresh authorization token";
     }
 
     /**

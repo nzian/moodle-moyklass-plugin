@@ -30,7 +30,7 @@ use local_moyclass\manager_db;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Автоматическая синхронизация информации о всех группах из CRM Мой класс в LMS Moodle
+ * Automatic synchronization of information about all groups from CRM My class in LMS Moodle
  */
 class upgrade_classes extends \core\task\scheduled_task {
     /**
@@ -39,7 +39,7 @@ class upgrade_classes extends \core\task\scheduled_task {
      * @return string
      */
     public function get_name() {
-        return "Обновить информацию о всех группах школы";
+        return "Update information about all school groups";
     }
 
     /**

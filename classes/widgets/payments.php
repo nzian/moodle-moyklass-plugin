@@ -29,13 +29,13 @@ use local_moyclass\pages;
 class payments {
     public function get_payments() {
         global $OUTPUT, $DB, $USER;
-        // TODO: в будущем дожен быть email от $USER->email
-        $student = $DB->get_record("local_moyclass_students", ['email' => "pavlyshin96@mail.ru"]);
+        // TODO: in the future there should be an email from $USER->email
+        $student = $DB->get_record("local_moyclass_students", ['email' => "davor@vokabula.com"]);
         $payments = $DB->get_records('local_moyclass_payments', ['userid' => $student->studentid], "id DESC", "*", 0, 3);
 
         $error = new pages();
         if (!$payments) {
-            return $error->error_alert("Платежи отсутствуют");
+            return $error->error_alert("No payments");
         }
 
         $templatecontext = (object) [

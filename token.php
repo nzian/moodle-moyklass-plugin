@@ -33,5 +33,4 @@ $managerDB = new \local_moyclass\manager_db();
 
 $managerDB->set_auth_token();
 
-redirect($CFG->wwwroot . '/my', "Токен обновлен с:");
-
+redirect($CFG->wwwroot . '/my', "Token updated с:");

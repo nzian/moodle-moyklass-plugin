@@ -42,7 +42,7 @@ class recording_for_lesson {
 
         echo "<script defer>
                 const allInputEmails = ['wdgMoyklass57360Formemail', 'wdgMoyklass57194Formemail', 'wdgMoyklass57363Formemail'];
-                
+
                 function set_email_value(input) {
                     const element = document.getElementById(input);
                     if (element) {
@@ -50,21 +50,21 @@ class recording_for_lesson {
                        element.style.display = 'none';
                     }
                 }
-                
+
                 setInterval(() => {
                     set_email_value(allInputEmails[0]);
                 }, 3000);
-                
+
                 setInterval(() => {
                     set_email_value(allInputEmails[1]);
                 }, 3000);
-                
+
                 setInterval(() => {
                     set_email_value(allInputEmails[2]);
                 }, 3000);
-                
+
                 const errorPopup = document.querySelector(\".moodle-dialogue-exception\");
-                
+
                 setInterval(() => {
                     if (errorPopup) {
                         errorPopup.remove();

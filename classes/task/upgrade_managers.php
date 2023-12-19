@@ -31,7 +31,7 @@ use local_moyclass\sync_users;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Автоматическая синхронизация работников из CRM Мой класс в LMS Moodle
+ * Automatic synchronization of employees from CRM My class in LMS Moodle
  */
 class upgrade_managers extends \core\task\scheduled_task {
     /**
@@ -40,7 +40,7 @@ class upgrade_managers extends \core\task\scheduled_task {
      * @return string
      */
     public function get_name() {
-        return "Обновить работников школы в базе данных";
+        return "Update school employees in the database";
     }
 
     /**

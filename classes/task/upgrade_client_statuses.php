@@ -30,7 +30,7 @@ use local_moyclass\manager_db;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Автоматическая синхронизация статусов клиентов из CRM Мой класс в LMS Moodle
+ * Automatic synchronization of client statuses from CRM My class in LMS Moodle
  */
 class upgrade_client_statuses extends \core\task\scheduled_task {
     /**
@@ -39,7 +39,7 @@ class upgrade_client_statuses extends \core\task\scheduled_task {
      * @return string
      */
     public function get_name() {
-        return "Обновить статусы клиентов школы";
+        return "Update school client statuses";
     }
 
     /**
