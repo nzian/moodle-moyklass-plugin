@@ -71,7 +71,7 @@ class sync_users {
         $user->department = $student->position ?: "";
 
         try {
-            return update_user($user, false, false);
+            return user_update_user($user, false, false);
         } catch (moodle_exception $e) {
             return $e;
         }
