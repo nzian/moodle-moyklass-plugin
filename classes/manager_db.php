@@ -57,7 +57,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function set_managers() {
+    public function set_managers(): void {
         global $DB;
         $api_service = new api_service();
         $results = $api_service->get_managers();
@@ -113,7 +113,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function set_students() {
+    public function set_students(): void {
         global $DB;
         $api_service = new api_service();
         $results = $api_service->get_students();
@@ -166,7 +166,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function set_joins() {
+    public function set_joins(): void {
         global $DB;
         $DB->delete_records('local_moyclass_joins');
         $api_service = new api_service();
@@ -205,7 +205,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function set_classes() {
+    public function set_classes(): void {
         global $DB;
         $DB->delete_records('local_moyclass_classes');
         $api_service = new api_service();
@@ -213,12 +213,12 @@ class manager_db {
         try {
             $results = $api_service->get_classes();
         } catch (Exception $e) {
-            error_log("Greška u dohvatu klasa: " . $e->getMessage());
+            error_log("Error retrieving classes: " . $e->getMessage());
             return;
         }
 
         if (!is_array($results) || empty($results)) {
-            error_log("Greška: Rezultat dohvaćanja klasa je prazan ili nije niz.");
+            error_log("Error: The result of fetching classes is empty or not a string.");
             return;
         }
 
@@ -257,7 +257,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function set_lessons() {
+    public function set_lessons(): void {
         global $DB;
         $DB->delete_records('local_moyclass_lessons');
         $DB->delete_records('local_moyclass_lessonsrecord');
@@ -299,7 +299,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    private function set_lesson_records($lesson) {
+    private function set_lesson_records($lesson): void {
         global $DB;
         $results = $lesson['records'];
         $transaction = $DB->start_delegated_transaction();
@@ -338,7 +338,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function set_client_statuses() {
+    public function set_client_statuses(): void {
         global $DB;
         $DB->delete_records('local_moyclass_clientstatuse');
         $api_service = new api_service();
@@ -378,7 +378,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function set_subscriptions() {
+    public function set_subscriptions(): void {
         global $DB;
         $DB->delete_records('local_moyclass_subscriptions');
         $api_service = new api_service();
@@ -412,7 +412,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function set_user_subscriptions() {
+    public function set_user_subscriptions(): void {
         global $DB;
         $DB->delete_records('local_moyclass_usersubscript');
         $api_service = new api_service();
@@ -459,7 +459,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function set_payments() {
+    public function set_payments(): void {
         global $DB;
         $DB->delete_records('local_moyclass_payments');
         $api_service = new api_service();
@@ -495,7 +495,7 @@ class manager_db {
      * @throws \dml_transaction_exception
      * @throws dml_exception
      */
-    public function set_invoices() {
+    public function set_invoices(): void {
         global $DB;
         $DB->delete_records('local_moyclass_invoices');
         $api_service = new api_service();

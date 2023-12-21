@@ -49,6 +49,35 @@ class sync_users {
     }
 
     /**
+     * Update user by id
+     *
+     * @param $student
+     * @param $user_id
+     * @return void
+     * @throws moodle_exception
+     */
+    private function update_user($student, $user_id) {
+        $user = new stdClass();
+        $user->id = $user_id;
+        $user->suspended = $this->check_active_users($student->isactive);
+        $user->email = strtolower($student->email);
+        $names = explode(' ', $student->name);
+        $user->lastname = $names[1] ?: "-";
+        $user->firstname = $names[0];
+        $user->lang = $student->lang ?: core_user::get_property_default('lang');
+        $user->phone1 = $student->phone ?: "";
+        $user->city = $student->city ?: core_user::get_property_default('city');
+        $user->institution = $student->company ?: "";
+        $user->department = $student->position ?: "";
+
+        try {
+            return update_user($user, false, false);
+        } catch (moodle_exception $e) {
+            return $e;
+        }
+    }
+
+    /**
      * Creating users in Moodle
      *
      * @throws \coding_exception
@@ -100,38 +129,8 @@ class sync_users {
     }
 
     /**
-     * Update user by id
-     *
-     * @param $student
-     * @param $user_id
-     * @return void
-     * @throws moodle_exception
-     */
-    private function update_user($student, $user_id) {
-        $user = new stdClass();
-        $user->id = $user_id;
-        $user->suspended = $this->check_active_users($student->isactive);
-        $user->email = strtolower($student->email);
-        $names = explode(' ', $student->name);
-        $user->lastname = $names[1] ?: "-";
-        $user->firstname = $names[0];
-        $user->lang = $student->lang ?: core_user::get_property_default('lang');
-        $user->phone1 = $student->phone ?: "";
-        $user->city = $student->city ?: core_user::get_property_default('city');
-        $user->institution = $student->company ?: "";
-        $user->department = $student->position ?: "";
-
-        try {
-            return user_update_user($user, false, false);
-        } catch (moodle_exception $e) {
-            return $e;
-        }
-    }
-
-    /**
      * Installing or updating users
      *
-     * @return void
      * @throws \dml_transaction_exception
      * @throws dml_exception
      * @throws \coding_exception
@@ -142,6 +141,18 @@ class sync_users {
         $sql = "SELECT * FROM {local_moyclass_students} WHERE `email` IS NOT NULL ORDER BY `email` DESC";
         $students = $DB->get_records_sql($sql);
         $this->set_users($students);
+    }
+
+    /**
+     * Check if user exist in database
+     *
+     * @param string $email
+     * @return int|false
+     */
+    private function check_if_user_exists($email) {
+        global $DB;
+        $user = $DB->get_record('user', ['email' => $email], 'id');
+        return $user ? $user->id : false;
     }
 
     /**
