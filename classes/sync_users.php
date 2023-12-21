@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+require_once($CFG->dirroot . '/user/lib.php');
+
 namespace local_moyclass;
 
 use core_user;
@@ -71,7 +73,7 @@ class sync_users {
         $user->department = $student->position ?: "";
 
         try {
-            return user_update_user($user, false, false);
+            return \user_update_user($user, false, false);
         } catch (moodle_exception $e) {
             return $e;
         }

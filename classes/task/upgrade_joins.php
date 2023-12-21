@@ -30,7 +30,7 @@ use local_moyclass\manager_db;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Automatic synchronization of information about student groups from CRM My Class in LMS Moodle
+ * Automatic synchronization of information about student groups from Moyklass CRM in LMS Moodle
  */
 class upgrade_joins extends \core\task\scheduled_task {
     /**

@@ -30,7 +30,7 @@ use local_moyclass\manager_db;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Automatic synchronization of successful student payments from CRM My Class in LMS Moodle
+ * Automatic synchronization of successful student payments from Moyklass CRM in LMS Moodle
  */
 class upgrade_payments extends \core\task\scheduled_task {
     /**

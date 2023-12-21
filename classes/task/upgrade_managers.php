@@ -31,7 +31,7 @@ use local_moyclass\sync_users;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Automatic synchronization of employees from CRM My class in LMS Moodle
+ * Automatic synchronization of employees from Moyklass CRM in LMS Moodle
  */
 class upgrade_managers extends \core\task\scheduled_task {
     /**

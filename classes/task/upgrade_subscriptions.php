@@ -30,7 +30,7 @@ use local_moyclass\manager_db;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Automatic synchronization of subscription types from CRM My class in LMS Moodle
+ * Automatic synchronization of subscription types from Moyklass CRM in LMS Moodle
  */
 class upgrade_subscriptions extends \core\task\scheduled_task {
     /**

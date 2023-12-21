@@ -28,7 +28,7 @@ use dml_exception;
 require_once("{$CFG->libdir}/filelib.php");
 
 /**
- * Service for obtaining data via api My class
+ * Service for obtaining data via Moyklass API
  */
 class api_service {
     private static $host_url = "https://api.moyklass.com/v1/company/";

@@ -30,7 +30,7 @@ use local_moyclass\manager_db;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Automatic synchronization of client statuses from CRM My class in LMS Moodle
+ * Automatic synchronization of client statuses from Moyklass CRM in LMS Moodle
  */
 class upgrade_client_statuses extends \core\task\scheduled_task {
     /**
