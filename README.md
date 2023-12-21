@@ -1,12 +1,12 @@
 Plugin for LMS Moodle MoyKlass
 =================================
-![PHP](https://img.shields.io/badge/PHP-v5.6%20%2F%20v7.0%20%2F%20v7.1%20%2F%20v7.2%20%2F%20v7.3%20%2F%20v7.4-blue.svg)
-![Moodle](https://img.shields.io/badge/Moodle-v4.0-orange.svg)
-[![GitHub Issues](https://img.shields.io/github/issues/kamenskiyyyy/moodle-moyklass-plugin.svg)](https://github.com/michael-milette/moodle-local_mailtest/issues)
+![PHP](https://img.shields.io/badge/PHP-v7.4%20%2F%208.0-blue.svg)
+![Moodle](https://img.shields.io/badge/Moodle-v4.3-orange.svg)
+[![GitHub Issues](https://img.shields.io/github/issues/Buda9/moodle-moyklass-plugin.svg)](https://github.com/Buda9/moodle-moyklass-plugin/issues)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-green.svg)](#contributing)
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](#license)
 
-> Unofficial plugin for synchronizing data with the CRM system "My Class"
+> Unofficial Moodle plugin for synchronizing data with the CRM system "MoyKlass"
 
 ## Functionality
 
