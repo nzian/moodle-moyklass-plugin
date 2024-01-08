@@ -10,10 +10,24 @@ Plugin for LMS Moodle MoyKlass
 
 ## Functionality
 
-- Synchronization of students and their statuses
-- Synchronization of subscriptions, classes, lessons, payments, etc.
-- Dashboard for students with widgets for displaying information about registrations for classes, balances of classes in subscriptions and
-   etc.
+The plugin offers several functionalities:
+
+- `Student Synchronization`: Manages the syncing of student data and their statuses with an MoyKlass CRM, ensuring Moodle's student information is up-to-date.
+- `Subscription and Class Management`: Automates the synchronization of subscriptions, classes, and lessons, facilitating efficient management of educational resources.
+- `Payment Processing`: Integrates payment handling within Moodle, streamlining the financial aspect of course management.
+- `Dynamic Student Dashboard`: Presents a personalized dashboard for students, featuring widgets that show essential information like class registrations, remaining classes in subscriptions, and other relevant data.
+- `Lesson Cancellation`: Includes capabilities to cancel lessons, providing flexibility in scheduling and management.
+- `API Integration`: Incorporates an API service for external communication, enabling seamless data exchange with other systems.
+- `Database and User Synchronization`: Ensures consistent data across platforms by synchronizing user details between Moodle and external systems.
+- `Email Notifications`: Manages sending email notifications, improving communication with students.
+- `Task and Widget Management`: Contains various tasks for data upgrades and widgets for displaying specific content like groups, payments, and invoices on Moodle pages.
+
+Additionally, the plugin likely includes:
+
+- `Customizable Widgets`: Provides widgets in the student dashboard for various functions like managing lessons and viewing invoices. These widgets enhance user interaction and accessibility.
+- `Teacher and Manager Integration`: Manages information related to teachers and school managers, potentially allowing for better coordination and communication within the educational environment.
+- `Automated Task Execution`: Facilitates automated tasks for updating and maintaining the system, ensuring smooth operation and data integrity.
+- `Enhanced User Experience`: Through its various features, the plugin aims to streamline processes and improve the overall user experience on the Moodle platform.
 
 ## Folder Structure (what i think it is)
 
