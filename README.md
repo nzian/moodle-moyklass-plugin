@@ -55,11 +55,6 @@ Additionally, the plugin likely includes:
   - `install.xml`: Database structure definition.
 
 - `lang/`
-  - `access.php`: Defines plugin capabilities.
-  - `install.php`: Custom install steps.
-  - `install.xml`: Database structure definition.
-
-- `lang/`
   - `en/`
     - `local_moyclass.php`: English language strings for the plugin.
 
@@ -72,9 +67,9 @@ Additionally, the plugin likely includes:
     - `welcome.mustache`: Email template for welcome messages.
 - `error_alert.mustache`: Mustache template used for displaying error messages or alerts.
 
-- `cancel-lesson.php`: Interface for canceling lessons.
-- `index.php`: Main entry point of the plugin.
-- `lessons.php`: Manages lesson-related features.
+- `cancel-lesson.php`: Interface for canceling lessons. (YOURMOODLE/local/moyclass/cancel-lesson.php)
+- `index.php`: Main entry point of the plugin. (YOURMOODLE/local/moyclass/index.php)
+- `lessons.php`: Manages lesson-related features. (YOURMOODLE/local/moyclass/lessons.php)
 - `settings.php`: Plugin configuration settings.
 - `subscriptions.php`: Manages subscription-related functionalities.
 - `token.php`: Token management features.
