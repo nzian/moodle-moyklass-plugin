@@ -18,7 +18,7 @@ Plugin for LMS Moodle MoyKlass
 ## Folder Structure (what i think it is)
 
 - `classes/`
-  - notifications/`
+  - `notifications/`
     - `emails.php`: Manages the creation and formatting of email notifications.
     - `manager.php`: Coordinates notification sending and handling processes.
   - `pages/`
